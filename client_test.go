@@ -42,10 +42,10 @@ func TestClientSend(t *testing.T) {
 	}
 	c.client = tc
 
-	res, err := c.Send(&Notification{
+	res, err := c.Send(&Message{
 		To:       To,
 		Priority: Priority,
-		Payload: Payload{
+		Notification: Notification{
 			Body: PayloadBody,
 		},
 	})
@@ -72,7 +72,7 @@ func TestClientSend(t *testing.T) {
 		t.Error(err)
 	}
 
-	var ntf Notification
+	var ntf Message
 	if err := json.Unmarshal(reqBody, &ntf); err != nil {
 		t.Error(err)
 	}
@@ -82,7 +82,7 @@ func TestClientSend(t *testing.T) {
 	if ntf.Priority != Priority {
 		t.Errorf("Priority: got %d, expect %d", ntf.Priority, Priority)
 	}
-	if ntf.Payload.Body != PayloadBody {
-		t.Errorf("PayloadBody: got %d, expect %d", ntf.Payload.Body, PayloadBody)
+	if ntf.Notification.Body != PayloadBody {
+		t.Errorf("PayloadBody: got %d, expect %d", ntf.Notification.Body, PayloadBody)
 	}
 }

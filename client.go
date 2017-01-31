@@ -9,19 +9,24 @@ import (
 )
 
 const (
+	PriorityNormal = "normal"
+	PriorityHigh   = "high"
+
 	fcnSendEndpoint = "https://fcm.googleapis.com/fcm/send"
 )
 
-type Notification struct {
-	To              string   `json:"to,omitempty"`
-	RegistrationIds []string `json:"registration_ids,omitempty"`
-	Priority        string   `json:"priority,omitempty"`
-	TimeToLive      int64    `json:"time_to_live,omitempty"`
-	DryRun          bool     `json:"dry_run,omitempty"`
-	Payload         Payload  `json:"notification,omitempty"`
+type Message struct {
+	To              string            `json:"to,omitempty"`
+	RegistrationIds []string          `json:"registration_ids,omitempty"`
+	Priority        string            `json:"priority,omitempty"`
+	TimeToLive      int64             `json:"time_to_live,omitempty"`
+	DryRun          bool              `json:"dry_run,omitempty"`
+	CollapseKey     string            `json:"collapse_key,omitempty"`
+	Notification    Notification      `json:"notification,omitempty"`
+	Data            map[string]string `json:"data,omitempty"`
 }
 
-type Payload struct {
+type Notification struct {
 	Title string `json:"title,omitempty"`
 	Body  string `json:"body,omitempty"`
 	Sound string `json:"sound,omitempty"`
@@ -55,7 +60,7 @@ func New(apiKey string) *Client {
 	}
 }
 
-func (c *Client) Send(msg *Notification) (*Response, error) {
+func (c *Client) Send(msg *Message) (*Response, error) {
 	body, err := json.Marshal(&msg)
 	if err != nil {
 		return nil, err
