@@ -27,11 +27,13 @@ type Message struct {
 }
 
 type Notification struct {
-	Title string `json:"title,omitempty"`
-	Body  string `json:"body,omitempty"`
-	Sound string `json:"sound,omitempty"`
-	Icon  string `json:"icon,omitempty"`
-	Tag   string `json:"tag,omitempty"`
+	Title       string `json:"title,omitempty"`
+	Body        string `json:"body,omitempty"`
+	Sound       string `json:"sound,omitempty"`
+	Icon        string `json:"icon,omitempty"`
+	Tag         string `json:"tag,omitempty"`
+	Color       string `json:"color,omitempty"`
+	ClickAction string `json:"click_action,omitempty"`
 }
 
 type Result struct {
