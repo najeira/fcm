@@ -51,7 +51,7 @@ type Response struct {
 }
 
 type Client struct {
-	client httpClient
+	client HttpClient
 	auth   string
 }
 
@@ -99,6 +99,10 @@ func (c *Client) Send(msg *Message) (*Response, error) {
 	return &out, nil
 }
 
-type httpClient interface {
+func (c *Client) SetHttpClient(hc HttpClient) {
+	c.client = hc
+}
+
+type HttpClient interface {
 	Do(*http.Request) (*http.Response, error)
 }

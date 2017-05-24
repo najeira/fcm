@@ -40,7 +40,7 @@ func TestClientSend(t *testing.T) {
 			}`))),
 		},
 	}
-	c.client = tc
+	c.SetHttpClient(tc)
 
 	res, err := c.Send(&Message{
 		To:       To,
