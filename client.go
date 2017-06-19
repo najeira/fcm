@@ -22,6 +22,7 @@ type Message struct {
 	TimeToLive      int64             `json:"time_to_live,omitempty"`
 	DryRun          bool              `json:"dry_run,omitempty"`
 	CollapseKey     string            `json:"collapse_key,omitempty"`
+	MutableContent  bool              `json:"mutable_content,omitempty"`
 	Notification    Notification      `json:"notification,omitempty"`
 	Data            map[string]string `json:"data,omitempty"`
 }
